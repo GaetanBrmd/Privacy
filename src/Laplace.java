@@ -21,8 +21,7 @@ public class Laplace {
         if (e>0) {
             double b = s/e1;
             double u = Math.random()-0.5;
-            System.out.println("u:"+u);
-            System.out.println("log:"+(Math.signum(u)));
+            //Le résulat X vaut: X = sigma - b*sign(u)*ln(1-2|u|)
             return (-b*Math.signum(u)*Math.log(1-2*Math.abs(u)));
         } else {
             return 0;
@@ -46,8 +45,10 @@ public class Laplace {
             analyse.put(i,0);
             for (double d : tab_test)
                 if (d>=i && d<=i+20) analyse.put(i,analyse.get(i)+1);
+
+            System.out.println(analyse.get(i));
         }
-        System.out.println(analyse);
+        //System.out.println(analyse);
 
         //Ecriture dans le csv
         FileWriter csvWriter = new FileWriter("new.csv");
@@ -55,10 +56,10 @@ public class Laplace {
         csvWriter.append(",");
         csvWriter.append("Count");
         csvWriter.append("\n");
-        for (Integer d : analyse.keySet()) {
-            csvWriter.append(d.toString());
+        for (int i=-500;i<=500;i+=20) {
+            csvWriter.append(Integer.toString(i));
             csvWriter.append(",");
-            csvWriter.append(analyse.get(d).toString());
+            csvWriter.append(analyse.get(i).toString());
             csvWriter.append("\n");
         }
         csvWriter.flush();
