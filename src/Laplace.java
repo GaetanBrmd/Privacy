@@ -24,6 +24,7 @@ public class Laplace {
             //Le résulat X vaut: X = sigma - b*sign(u)*ln(1-2|u|)
             return (-b*Math.signum(u)*Math.log(1-2*Math.abs(u)));
         } else {
+            System.out.println("Requete impossible à cause d'un manque de budget !");
             return 0;
         }
     }
@@ -51,12 +52,12 @@ public class Laplace {
         //System.out.println(analyse);
 
         //Ecriture dans le csv
-        FileWriter csvWriter = new FileWriter("new.csv");
+        FileWriter csvWriter = new FileWriter("perturbations.csv");
         csvWriter.append("Range");
         csvWriter.append(",");
         csvWriter.append("Count");
         csvWriter.append("\n");
-        for (int i=-500;i<=500;i+=20) {
+        for (int i=-500;i<500;i+=20) {
             csvWriter.append(Integer.toString(i));
             csvWriter.append(",");
             csvWriter.append(analyse.get(i).toString());
