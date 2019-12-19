@@ -92,13 +92,13 @@ public class LaunchMe {
             for (int i : tab2) sum += i;
             System.out.println("SUM : " + sum);
 
-            //Generate 1000 noises and compute the average
+            //Generate y noises and compute the average
             Laplace lp2 = new Laplace(0.01f);
             lp2.setTest(true);
             double err_avg = 0;
-            for (int i = 0; i < 1000; i++) err_avg += Math.abs(lp2.genNoise(1000, 0.01f));
+            for (int i = 0; i < y; i++) err_avg += Math.abs(lp2.genNoise(1000, 0.01f));
             err_avg /= 1000;
-            System.out.println("Moyenne des 1000 erreures de perturbations de SUM : " + err_avg);
+            System.out.println("Moyenne des "+y+" erreures de perturbations de SUM : " + err_avg);
 
             //Compute the ratio between the average and the sum
             double ratio = err_avg/sum;
