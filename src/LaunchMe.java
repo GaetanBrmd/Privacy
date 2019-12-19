@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.HashMap;
 
 public class LaunchMe {
     private int n; // Size of the dataset
@@ -20,6 +21,36 @@ public class LaunchMe {
         int[] tab1=new int[launch1.n];
         for(int i=0;i<launch1.n;i++) tab1[i]= (int) Math.round(Math.random()*launch1.m); // Generate the random set
         System.out.println("Tableau 1 généré !");
+
+        // ========================Q4==============================
+        Laplace lp = new Laplace(1.2f);
+        lp.setTest(true);
+        double[] tab_test=new double[10000];
+        for (int i=0;i<tab_test.length;i++) tab_test[i]=lp.genNoise(50,1); // Generate an array of 10000 noise
+        System.out.println("Tableau de perturbations généré !");
+        // Analysis of the results in a Hashmap
+        // key : start of the range (500, 480 etc.)
+        // value : count in the range
+        HashMap<Integer,Integer> analyse=new HashMap<Integer,Integer>();
+        for(int i=-500;i<500;i+=20){
+            analyse.put(i,0);
+            for (double d : tab_test) if (d>=i && d<=i+20) analyse.put(i,analyse.get(i)+1);
+        }
+
+        // Printing in a .csv file
+        FileWriter csvWriter1 = new FileWriter("perturbations.csv");
+        csvWriter1.append("Range");
+        csvWriter1.append(",");
+        csvWriter1.append("Count");
+        csvWriter1.append("\n");
+        for (int i=-500;i<500;i+=20) {
+            csvWriter1.append(Integer.toString(i));
+            csvWriter1.append(",");
+            csvWriter1.append(analyse.get(i).toString());
+            csvWriter1.append("\n");
+        }
+        csvWriter1.flush();
+        csvWriter1.close();
 
         //==========================Q5=============================
         int count=0;
