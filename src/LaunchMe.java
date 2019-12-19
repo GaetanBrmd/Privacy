@@ -77,7 +77,7 @@ public class LaunchMe {
         csvWriter.append("Ratio");
         csvWriter.append("\n");
 
-        int[] n={100,10000,1000000}; //Datasets sizes
+        int[] n={100,1000,10000,1000000}; //Datasets sizes
         for (int y : n) {
             // Generate a dataset of size y
             LaunchMe launch2 = new LaunchMe(y, 1000, 151);
@@ -85,7 +85,7 @@ public class LaunchMe {
             for (int i = 0; i < launch2.n; i++) {
                 tab2[i] = (int) Math.round(Math.random() * launch2.m);
             }
-            System.out.println("Tableau 2 généré !");
+            System.out.println("\nTableau 2 généré !");
 
             // Compute the real sum of the dataset
             int sum = 0;
@@ -99,6 +99,7 @@ public class LaunchMe {
             for (int i = 0; i < y; i++) err_avg += Math.abs(lp2.genNoise(1000, 0.01f));
             err_avg /= y;
             System.out.println("Moyenne des "+y+" erreures de perturbations de SUM : " + err_avg);
+            System.out.println("Ratio entre err_avg et lambda : "+err_avg*0.01/1000);
 
             //Compute the ratio between the average and the sum
             double ratio = err_avg/sum;
