@@ -97,7 +97,7 @@ public class LaunchMe {
             lp2.setTest(true);
             double err_avg = 0;
             for (int i = 0; i < y; i++) err_avg += Math.abs(lp2.genNoise(1000, 0.01f));
-            err_avg /= 1000;
+            err_avg /= y;
             System.out.println("Moyenne des "+y+" erreures de perturbations de SUM : " + err_avg);
 
             //Compute the ratio between the average and the sum
